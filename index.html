@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QCloud SDK</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<script type="text/javascript" src="sdk/jquery1x.min.js"></script>
+	<script type="text/javascript" src="sdk/qcloud_sdk.js"></script>
+	<script type="text/javascript" src="sdk/swfobject.js"></script>
+	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://v3.bootcss.com/assets/css/docs.min.css">
+	<script type="text/javascript">
+	$(function(){
+		var bucketName = "111";
+		var cos = new CosCloud("APPID");		
+		var successCallBack = function(result){
+			$("#result").val(result);
+		};
+
+		var errorCallBack = function(result){
+			$("#result").val(result.responseText);
+		}
+
+		$("#updateFolder").click(function(){
+			$("#result").val('');
+			cos.updateFolder(successCallBack, errorCallBack, bucketName, "/newfolder/", "This is sdk test folder");
+		});
+
+		$("#updateFile").click(function(){
+			$("#result").val('');
+			cos.updateFile(successCallBack, errorCallBack, bucketName, "/tel.txt", "test file");
+		});
+
+		$("#deleteFolder").click(function(){
+			$("#result").val('');
+			cos.deleteFolder(successCallBack, errorCallBack, bucketName, "/");
+		});
+
+		$("#deleteFile").click(function(){
+			$("#result").val('');
+			cos.deleteFile(successCallBack, errorCallBack, bucketName, "/tel.txt");
+		});
+
+		$("#getFolderStat").click(function(){
+			$("#result").val('');
+			cos.getFolderStat(successCallBack, errorCallBack, bucketName, "/newfolder/");
+		});
+
+		$("#getFileStat").click(function(){
+			$("#result").val('');
+			cos.getFileStat(successCallBack, errorCallBack, bucketName, "/tel.txt");
+		});
+
+		$("#createFolder").click(function(){
+			$("#result").val('');
+			cos.createFolder(successCallBack, errorCallBack, bucketName, "/newfolder/");
+		});
+
+		$("#getFolderList").click(function(){
+			$("#result").val('');
+			cos.getFolderList(successCallBack, errorCallBack, bucketName, "/", 20, "", 0);
+		});
+
+		$("#uploadFile").click(function(){
+			$("#result").val('');
+			var selectFunc = function(){
+				 var files = document.getElementById("file").files;
+				 if(files && files.length == 1){
+				 	cos.uploadFile(successCallBack, errorCallBack, bucketName, "/tel.txt", files[0]);
+				 }
+				 else{
+				 	alert("请选择一个文件");
+				 }
+			};
+
+			if (/msie/.test(navigator.userAgent.toLowerCase())) {
+	            $('#file').click(function(event) {
+	                setTimeout(function() {
+	                    if($('#file').val().length > 0) {
+	                        selectFunc();
+	                    }
+	                }, 0);
+	            });
+	        }
+	        else {
+	             $('#file').change(selectFunc);
+	        }
+	        $("#file").trigger("click");
+		});
+
+		$("#sliceUploadFile").click(function(){
+			$("#result").val('');
+			if(!cos.hasFlashVersionOrBetter(20, 0)){
+                if(confirm("当前浏览器不支持Flash，无法上传文件，要下载flash吗?")) {
+                    window.open("https://get.adobe.com/cn/flashplayer/","_blank");
+                    return;
+                }
+                return;
+            }
+            var selectFunc = function(){
+				 var files = document.getElementById("file").files;
+				 if(files && files.length == 1){
+				 	if(!$('#qs').length){				 		
+				 		$('body').append('<object id="qs" width="0" height="0" type="application/x-shockwave-flash" data="sdk/Somethingtest.swf" style="visibility: visible;"></object>');
+				 	}
+				 	cos.sliceUploadFile(successCallBack, errorCallBack, bucketName, "/movie/" + files[0].name, files[0]);
+				 }
+				 else{
+				 	alert("请选择一个文件");
+				 }
+			};
+
+			if (/msie/.test(navigator.userAgent.toLowerCase())) {
+	            $('#file').click(function(event) {
+	                setTimeout(function() {
+	                    if($('#file').val().length > 0) {
+	                        selectFunc();
+	                    }
+	                }, 0);
+	            });
+	        }
+	        else {
+	             $('#file').unbind().change(selectFunc);
+	        }
+	        $("#file").trigger("click");
+		});
+	});
+	</script>
+</head>
+<body>
+<div class="bs-docs-header" id="content" tabindex="-1">
+      <div class="container">
+        <h1>腾讯云 Javasript SDK</h1>
+      </div>
+    </div>
+    <div class="container bs-docs-container">
+		<input  id="file" type="file" style="display:none;"/>
+    	<div class="row" style="padding:20px;">
+    		<div class="col-md-2"><a id="updateFolder" href="javascript:void(0);" class="btn btn-lg btn-outline">updateFolder</a></div>
+    		<div class="col-md-2"><a id="updateFile" href="javascript:void(0);" class="btn btn-lg btn-outline">updateFile</a></div>
+    		<div class="col-md-2"><a id="deleteFolder" href="javascript:void(0);" class="btn btn-lg btn-outline">deleteFolder</a></div>
+    		<div class="col-md-2"><a id="deleteFile" href="javascript:void(0);" class="btn btn-lg btn-outline">deleteFile</a></div>
+    	</div>
+    	<div class="row" style="padding:20px;">    		
+    		<div class="col-md-2"><a id="getFolderStat" href="javascript:void(0);" class="btn btn-lg btn-outline">getFolderStat</a></div>
+    		<div class="col-md-2"><a id="getFileStat" href="javascript:void(0);" class="btn btn-lg btn-outline">getFileStat</a></div>
+    		<div class="col-md-2"><a id="createFolder" href="javascript:void(0);" class="btn btn-lg btn-outline">createFolder</a></div>
+		  	<div class="col-md-2"><a id="getFolderList" href="javascript:void(0);" class="btn btn-lg btn-outline">getFolderList</a></div>
+		</div>
+		<div class="row" style="padding:20px;">			
+		  	<div class="col-md-2"><a id="uploadFile" href="javascript:void(0);" class="btn btn-lg btn-outline">uploadFile</a></div>
+		  	<div class="col-md-2"><a id="sliceUploadFile" href="javascript:void(0);" class="btn btn-lg btn-outline">sliceUploadFile</a></div>
+		</div>
+		<div class="row" style="padding:20px;">
+			<textarea id="result" rows="20" cols="100"></textarea>
+		</div>
+    </div>
+</body>
+</html>
