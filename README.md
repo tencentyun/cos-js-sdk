@@ -17,7 +17,7 @@ SDK需要浏览器支持Flash。
 <script type="text/javascript" src="sdk/jquery1x.min.js"></script>
 <script type="text/javascript" src="sdk/qcloud_sdk.js"></script>
 <script type="text/javascript" src="sdk/swfobject.js"></script>
-本SDK需要jQuery的支持，如果您的项目已经引入jQuery，那么可以省略jquery1x.min.js的引入。
+本SDK需要jQuery的支持，如果您的项目已经引入jQuery，那么可以省略jquery1x.min.js的引入。<br>
 修改Sign.php中的APPID、SECRET_ID、SECRET_KEY，换成您相应的值。
 
 ## 上传、查询、删除程序示例
