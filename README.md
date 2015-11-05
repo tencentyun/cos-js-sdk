@@ -2,8 +2,8 @@
 js sdk for [腾讯云对象存储服务](http://wiki.qcloud.com/wiki/COS%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D)
 
 ##前期准备
-SDK需要浏览器支持HTML 5。
-SDK需要浏览器支持Flash。
+SDK需要浏览器支持HTML 5。<br>
+SDK需要浏览器支持Flash。<br>
 获取项目ID(appid)，bucket，secret_id和secret_key。
 
 ## 安装（直接下载源码集成）
@@ -13,7 +13,7 @@ SDK需要浏览器支持Flash。
 调用请参考示例1
 
 ## 加载相关文件
-在您使用SDK之前，加载相关支持的Javascript文件即可。
+在您使用SDK之前，加载相关支持的Javascript文件即可。<br>
 <script type="text/javascript" src="sdk/jquery1x.min.js"></script>
 <script type="text/javascript" src="sdk/qcloud_sdk.js"></script>
 <script type="text/javascript" src="sdk/swfobject.js"></script>
