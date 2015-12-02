@@ -200,8 +200,6 @@ CosCloud.prototype.uploadFile = function(success, error, bucketName, remotePath,
 	}, error, bucketName);
 }
 
-CosCloud.prototype.uploadFile
-
 CosCloud.prototype.sliceUploadFile = function(success, error, bucketName, remotePath, file){
 	var that = this;
 	var reader = new FileReader();
