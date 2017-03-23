@@ -1,4 +1,4 @@
-# tencentyun-cos-js-sdk
+# tencentyun-cos-js-sdk-v3
 js sdk for [腾讯云对象存储服务](http://wiki.qcloud.com/wiki/COS%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D)
 
 ##前期准备
