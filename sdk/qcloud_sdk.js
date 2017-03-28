@@ -302,10 +302,14 @@ CosCloud.prototype.sliceUploadFile = function(success, error, bucketName, remote
         if(e.target.result != null) {
             g_totalSize += e.target.result.length;
             if (e.target.result.length != 0) {
-            	if(!Qh){
-            		Qh = swfobject.getObjectById("qs");
-            	}
-                Qh.ftn_sign_update_dataurl(e.target.result);
+                // if(!Qh){
+            		// Qh = swfobject.getObjectById("qs");
+                // }
+                // Qh.ftn_sign_update_dataurl(e.target.result);
+                if (e.target.result) {
+					middleSha1 = new jsSHA('SHA-1', 'BYTES');
+					middleSha1.update(e.target.result);
+				}
             }
         }
         g_currentChunk += 1;
@@ -320,7 +324,9 @@ CosCloud.prototype.sliceUploadFile = function(success, error, bucketName, remote
         }
         else {
             g_running = false;
-            var sha1 = Qh.ftn_sha1_result();
+            // var sha1 = Qh.ftn_sha1_result();
+            var sha1 = middleSha1.getHash('HEX');
+            console.log('=', sha1);
             //getSession
             that.getAppSign(function(json){
             	var jsonResult = $.parseJSON(json);
@@ -395,7 +401,8 @@ CosCloud.prototype.sliceUploadFile = function(success, error, bucketName, remote
         }
 	};
 	reader.onerror = error;
-	var Qh = swfobject.getObjectById("qs");
+	// var Qh = swfobject.getObjectById("qs");
+    var middleSha1 = new jsSHA('SHA-1', 'BYTES');
     var g_LoadFileBlockSize = 2 * 1024 * 1024;
     var g_LoadFileDelayTime = 0;
     var g_chunkId = null;
@@ -413,7 +420,7 @@ CosCloud.prototype.sliceUploadFile = function(success, error, bucketName, remote
 	    start = g_currentChunk * g_LoadFileBlockSize;
 	    if(file != null) {
 	        end = ((start + g_LoadFileBlockSize) >= file.size) ? file.size : start + g_LoadFileBlockSize;
-	        reader.readAsDataURL(that.slice.call(file, start, end));
+	        reader.readAsBinaryString(that.slice.call(file, start, end));
 	    }
     };
     nextSlice();

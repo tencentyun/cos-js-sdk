@@ -6,7 +6,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<script type="text/javascript" src="sdk/jquery1x.min.js"></script>
 	<script type="text/javascript" src="sdk/qcloud_sdk.js"></script>
-	<script type="text/javascript" src="sdk/swfobject.js"></script>
 	<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="http://v3.bootcss.com/assets/css/docs.min.css">
 	<script type="text/javascript">
@@ -100,9 +99,6 @@
             var selectFunc = function(){
 				 var files = document.getElementById("file").files;
 				 if(files && files.length == 1){
-				 	if(!$('#qs').length){				 		
-				 		$('body').append('<object id="qs" width="0" height="0" type="application/x-shockwave-flash" data="sdk/Somethingtest.swf" style="visibility: visible;"></object>');
-				 	}
 				 	cos.sliceUploadFile(successCallBack, errorCallBack, bucketName, "/movie/" + files[0].name, files[0]);
 				 }
 				 else{
@@ -155,6 +151,5 @@
 			<textarea id="result" rows="20" cols="100"></textarea>
 		</div>
     </div>
-	<object id="qs" width="0" height="0" type="application/x-shockwave-flash" data="sdk/Somethingtest.swf" style="visibility: visible;"></object>
 </body>
 </html>
