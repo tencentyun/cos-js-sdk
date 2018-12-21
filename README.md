@@ -1,7 +1,10 @@
 # tencentyun-cos-js-sdk-v3
 js sdk for [腾讯云对象存储服务](http://wiki.qcloud.com/wiki/COS%E4%BA%A7%E5%93%81%E4%BB%8B%E7%BB%8D)
 
-##前期准备
+## 已弃用 - 请升级到 cos-js-sdk-v5
+SDK 依赖的 JSON API 已弃用，请直接使用基于 XML API 的 [cos-js-sdk-v5](https://github.com/tencentyun/cos-js-sdk-v5)。
+
+## 前期准备
 SDK需要浏览器支持HTML 5。<br>
 SDK需要浏览器支持Flash。<br>
 获取项目ID(appid)，bucket，secret_id和secret_key。
